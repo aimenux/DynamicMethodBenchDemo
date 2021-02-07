@@ -4,6 +4,7 @@
     {
         MethodInfoInvoke,
         DelegateDynamicInvoke,
-        DynamicCastInvoke
+        DynamicCastInvoke,
+        FuncInvoke
     }
 }

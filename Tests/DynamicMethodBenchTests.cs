@@ -75,5 +75,19 @@ namespace Tests
             // assert
             result.Should().Be(expected);
         }
+
+        [Theory]
+        [InlineData(BenchSample.PublicSumMethod, 1, 4, 5)]
+        [InlineData(BenchSample.ProtectedSumMethod, 1, 4, 5)]
+        [InlineData(BenchSample.PrivateSumMethod, 1, 4, 5)]
+        public void Should_FuncInvoke_Be_Valid(string name, int left, int right, int expected)
+        {
+            // arrange
+            // act
+            var result = DynamicMethodBench.FuncInvoke(name, left, right);
+
+            // assert
+            result.Should().Be(expected);
+        }
     }
 }

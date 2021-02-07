@@ -13,6 +13,8 @@ In this demo, i m using [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDot
 >
 > :three: Using DynamicCastInvoke
 >
+> :four: Using FuncInvoke
+>
 
 In order to run benchmarks, type these commands in your favorite terminal :
 >
@@ -24,21 +26,27 @@ In order to run benchmarks, type these commands in your favorite terminal :
 >
 > :writing_hand: `.\App.exe --anyCategories=DynamicCastInvoke`
 >
+> :writing_hand: `.\App.exe --anyCategories=FuncInvoke`
+>
 
 ```
-|                         Method |            Categories |        Mean |     Error |    StdDev |         Min |         Max | Rank |  Gen 0 | Gen 1 | Gen 2 | Allocated |
-|------------------------------- |---------------------- |------------:|----------:|----------:|------------:|------------:|-----:|-------:|------:|------:|----------:|
-|         PublicMethodInfoInvoke |      MethodInfoInvoke |   298.88 ns |  2.969 ns |  2.318 ns |   295.75 ns |   303.18 ns |    1 | 0.0558 |     - |     - |     176 B |
-|      ProtectedMethodInfoInvoke |      MethodInfoInvoke |   309.86 ns |  5.746 ns |  5.374 ns |   299.18 ns |   318.42 ns |    2 | 0.0558 |     - |     - |     176 B |
-|        PrivateMethodInfoInvoke |      MethodInfoInvoke |   311.75 ns |  6.168 ns |  7.343 ns |   302.10 ns |   325.60 ns |    2 | 0.0558 |     - |     - |     176 B |
-|                                |                       |             |           |           |             |             |      |        |       |       |           |
-|   PrivateDelegateDynamicInvoke | DelegateDynamicInvoke | 1,465.89 ns | 14.011 ns | 13.106 ns | 1,448.71 ns | 1,486.21 ns |    1 | 0.0992 |     - |     - |     312 B |
-|    PublicDelegateDynamicInvoke | DelegateDynamicInvoke | 1,515.11 ns | 24.103 ns | 25.790 ns | 1,487.89 ns | 1,602.30 ns |    2 | 0.0992 |     - |     - |     312 B |
-| ProtectedDelegateDynamicInvoke | DelegateDynamicInvoke | 1,535.90 ns | 29.424 ns | 43.129 ns | 1,487.79 ns | 1,650.24 ns |    2 | 0.0992 |     - |     - |     312 B |
-|                                |                       |             |           |           |             |             |      |        |       |       |           |
-|        PublicDynamicCastInvoke |     DynamicCastInvoke |    23.84 ns |  0.290 ns |  0.271 ns |    23.51 ns |    24.47 ns |    1 | 0.0229 |     - |     - |      72 B |
-|     ProtectedDynamicCastInvoke |     DynamicCastInvoke |    58.48 ns |  0.328 ns |  0.291 ns |    58.21 ns |    59.26 ns |    2 | 0.0510 |     - |     - |     160 B |
-|       PrivateDynamicCastInvoke |     DynamicCastInvoke |    66.15 ns |  0.351 ns |  0.311 ns |    65.33 ns |    66.61 ns |    3 | 0.0509 |     - |     - |     160 B |
+|                         Method |            Categories |         Mean |      Error |     StdDev |          Min |          Max | Rank |  Gen 0 |  Gen 1 | Gen 2 | Allocated |
+|------------------------------- |---------------------- |-------------:|-----------:|-----------:|-------------:|-------------:|-----:|-------:|-------:|------:|----------:|
+|        PrivateMethodInfoInvoke |      MethodInfoInvoke |    299.02 ns |   4.184 ns |   3.913 ns |    294.10 ns |    306.77 ns |    1 | 0.0558 |      - |     - |     176 B |
+|      ProtectedMethodInfoInvoke |      MethodInfoInvoke |    300.55 ns |   3.261 ns |   3.050 ns |    296.21 ns |    306.66 ns |    1 | 0.0558 |      - |     - |     176 B |
+|         PublicMethodInfoInvoke |      MethodInfoInvoke |    301.13 ns |   2.600 ns |   2.171 ns |    298.23 ns |    305.89 ns |    1 | 0.0558 |      - |     - |     176 B |
+|                                |                       |              |            |            |              |              |      |        |        |       |           |
+|   PrivateDelegateDynamicInvoke | DelegateDynamicInvoke |  1,514.44 ns |  17.985 ns |  16.824 ns |  1,483.31 ns |  1,547.06 ns |    1 | 0.0992 |      - |     - |     312 B |
+|    PublicDelegateDynamicInvoke | DelegateDynamicInvoke |  1,516.57 ns |  20.886 ns |  24.053 ns |  1,489.97 ns |  1,595.51 ns |    1 | 0.0992 |      - |     - |     312 B |
+| ProtectedDelegateDynamicInvoke | DelegateDynamicInvoke |  1,524.06 ns |  29.901 ns |  39.917 ns |  1,456.34 ns |  1,584.77 ns |    1 | 0.0992 |      - |     - |     312 B |
+|                                |                       |              |            |            |              |              |      |        |        |       |           |
+|        PublicDynamicCastInvoke |     DynamicCastInvoke |     23.73 ns |   0.103 ns |   0.081 ns |     23.57 ns |     23.85 ns |    1 | 0.0229 |      - |     - |      72 B |
+|     ProtectedDynamicCastInvoke |     DynamicCastInvoke |     61.18 ns |   0.711 ns |   0.594 ns |     60.16 ns |     62.47 ns |    2 | 0.0510 |      - |     - |     160 B |
+|       PrivateDynamicCastInvoke |     DynamicCastInvoke |     61.84 ns |   0.346 ns |   0.307 ns |     61.38 ns |     62.45 ns |    2 | 0.0509 |      - |     - |     160 B |
+|                                |                       |              |            |            |              |              |      |        |        |       |           |
+|              PrivateFuncInvoke |            FuncInvoke | 87,554.53 ns | 749.636 ns | 701.210 ns | 86,731.07 ns | 88,854.02 ns |    1 | 1.5869 | 0.8545 |     - |    5056 B |
+|               PublicFuncInvoke |            FuncInvoke | 88,628.63 ns | 740.248 ns | 656.210 ns | 87,863.70 ns | 89,812.93 ns |    1 | 1.5869 | 0.8545 |     - |    5056 B |
+|            ProtectedFuncInvoke |            FuncInvoke | 88,786.06 ns | 857.615 ns | 802.214 ns | 87,422.49 ns | 90,000.67 ns |    1 | 1.5869 | 0.8545 |     - |    5056 B |
 ```
 
 **`Tools`** : vs19, net 5.0
