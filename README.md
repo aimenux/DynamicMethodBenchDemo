@@ -18,6 +18,12 @@ In order to run benchmarks, type these commands in your favorite terminal :
 >
 > :writing_hand: `.\App.exe --filter DynamicMethodBench`
 >
+> :writing_hand: `.\App.exe --anyCategories=MethodInfoInvoke`
+>
+> :writing_hand: `.\App.exe --anyCategories=DelegateDynamicInvoke`
+>
+> :writing_hand: `.\App.exe --anyCategories=DynamicCastInvoke`
+>
 
 ```
 |                         Method |            Categories |        Mean |     Error |    StdDev |         Min |         Max | Rank |  Gen 0 | Gen 1 | Gen 2 | Allocated |
