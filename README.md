@@ -1,9 +1,11 @@
+![.NET](https://github.com/aimenux/DynamicMethodBenchDemo/workflows/.NET/badge.svg)
+
 # DynamicMethodBenchDemo
 ```
 Benchmarking ways of dynamically invoking methods
 ```
 
-In this demo, i m using [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet) library in order to benchmark various ways of dynamically invoking methods :
+In this demo, i m using [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet) library in order to benchmark various ways of dynamically invoking (public, protected, private) methods :
 >
 > :one: Using MethodInfoInvoke
 >
